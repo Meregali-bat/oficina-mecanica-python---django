@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'servicos/css/servicos.css' %}"> 
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    
+<div class="row" style='margin:0; padding-top: 5rem;'>
+    <div class='col-1'></div>
+    <div class='col-10'>
+        <h2>{% if form.instance.pk %}Editar{% else %}Novo{% endif %} Serviço</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-save-servico">Salvar</button>
+        </form>
+        <a href="{% url 'servicos:listar_servicos' %}" class="btn-back-servico">Voltar</a>
+    </div>
+    <div class='col-1'></div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+.btn-navegacao-dashboard{
+    background-color: #A90015;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 16px;
+    text-align: center;
+    padding: 3rem;
+    margin-bottom: 4rem;
+    font-size: 1.5rem;
+}
+
+.btn-navegacao-dashboard:hover {
+    color: white; 
+    text-decoration: none;
+}

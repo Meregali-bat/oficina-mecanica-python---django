@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'funcionarios/css/funcionarios.css' %}"> 
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    
+<div class="row" style='margin:0; padding-top: 5rem;'>
+    <div class='col-1'></div>
+    <div class='col-10'>
+        <h1>Editar Mecânico</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn-edit-mecanico">Salvar</button>
+        </form>
+        <a href="{% url 'funcionarios:listar_mecanicos' %}">Voltar para a lista de mecânicos</a>
+    </div>
+    <div class='col-1'></div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'servicos/css/servicos.css' %}"> 
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    
+<div class="row" style='margin:0; padding-top: 5rem;'>
+    <div class='col-1'></div>
+    <div class='col-10'>
+        <table class="table table-dark" id="table-servicos">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Peça</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for servico in servicos %}  
+                    <tr>
+                        <td>{{servico.id}}</td>
+                        <td>{{servico.nome}}</td>
+                        <td>{{servico.valor}}</td>
+                        <td>{{servico.peca}}</td>
+                        <td>
+                            <a href="{% url 'servicos:editar_servico' servico.id %}" class="btn-edit-servico">Editar</a> |
+                            <a href="{% url 'servicos:remover_servico' servico.id %}" class="btn-rm-servico">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+          <a href="{% url 'servicos:criar_servico' %}" class="btn-add-servico">Adicionar Serviço</a>
+    </div>
+    <div class='col-1'></div>
+</div>
+
+{% endblock %}

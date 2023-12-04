@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'ordem_servico/css/ordem_servico.css' %}"> 
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    
+<div class="row" style='margin:0; padding-top: 5rem;'>
+    <div class='col-1'></div>
+    <div class='col-10'>
+        <h2>Ordens de Serviço Concluídas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Carro</th>
+                    <th>Data de Conclusão</th>
+                    <th>Detalhes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ordem in ordens_concluidas %}
+                <tr>
+                    <td>{{ ordem.id }}</td>
+                    <td>{{ ordem.cliente }}</td>
+                    <td>{{ ordem.carro }}</td>
+                    <td>{{ ordem.data_conclusao }}</td>
+                    <td>
+                        <a href="{% url 'ordem_servico:detalhes_ordem' ordem.id %}">Ver detalhes</a>
+                        <form action="{% url 'ordem_servico:excluir_ordem' ordem.id %}" method="post" class="botao-excluir-OS">
+                            {% csrf_token %}
+                            <input type="submit" value="Excluir Ordem">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Ordens de Serviço Não Concluídas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Carro</th>
+                    <th>Data de Conclusão</th>
+                    <th>Detalhes</th>
+                    <th>Concluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ordem in ordens_nao_concluidas %}
+                <tr>
+                    <td>{{ ordem.id }}</td>
+                    <td>{{ ordem.cliente }}</td>
+                    <td>{{ ordem.carro }}</td>
+                    <td>{{ ordem.data_conclusao }}</td>
+                    <td><a href="{% url 'ordem_servico:detalhes_ordem' ordem.id %}">Ver detalhes</a></td>
+                    <td>
+                        <form action="{% url 'ordem_servico:concluir_ordem' ordem.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Concluir Ordem">
+                        </form>
+                        <form action="{% url 'ordem_servico:excluir_ordem' ordem.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Excluir Ordem">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class='col-1'></div>
+    
+</div>
+<div class="row" style='margin:0; padding-top: 2rem;'>
+    <div class='col-1'></div>
+    <div class='col-10'>
+        <a href="{% url 'ordem_servico:criar_ordem' %}">Adicionar Nova Ordem</a>
+    </div>
+    <div class='col-1'></div>
+</div>
+
+{% endblock %}

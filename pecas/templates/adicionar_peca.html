@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head'  %}
+    <!-- <link rel="stylesheet" href="{% static 'pecas/css/pecas.css' %}"> -->
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    
+<div class="row" style='margin:0; padding-top: 5rem;'>
+    <div class='col-1'></div>
+    <div class='col-10'>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+        </form>
+    </div>
+    <div class='col-1'></div>
+</div>
+
+{% endblock %}

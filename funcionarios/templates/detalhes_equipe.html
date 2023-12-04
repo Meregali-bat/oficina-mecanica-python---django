@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'funcionarios/css/funcionarios.css' %}"> 
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    
+<div class="row" style='margin:0; padding-top: 5rem;'>
+    <div class='col-1'></div>
+    <div class='col-10'>
+        <h1>Equipe  {{ equipe.nome }}</h1>
+        <h2>Membros:</h2>
+        <ul>
+            {% for membro in membros %}
+                <li>{{ membro.nome }}</li>
+            {% empty %}
+                <li>Nenhum membro na equipe.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'funcionarios:listar_equipes' %}">Voltar para a lista de equipes</a>
+    </div>
+    <div class='col-1'></div>
+</div>
+
+{% endblock %}

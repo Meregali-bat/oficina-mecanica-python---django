@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'ordem_servico/css/ordem_servico.css' %}"> {% endblock  %}
+
+{% block 'dashboard'  %}
+    
+<div class="row" style='margin:0; padding-top: 5rem;'>
+    <div class='col-1'></div>
+    <div class='col-10'>
+        <h2>Concluir Ordem de Serviço {{ ordem.id }}</h2>
+        <p>Cliente: {{ ordem.cliente }}</p>
+        <p>Carro: {{ ordem.carro }}</p>
+        <p>Problema: {{ ordem.problema_carro }}</p>
+        <p>Data de Conclusão: {{ ordem.data_conclusao }}</p>
+        <h3>Peças</h3>
+        <ul>
+            {% for peca in ordem.pecas.all %}
+                <li>{{ peca }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Serviços</h3>
+        <ul>
+            {% for servico in ordem.servicos.all %}
+                <li>{{ servico }}</li>
+            {% endfor %}
+        </ul>
+        <p>Valor Total das Peças: {{ ordem.valor_total_pecas }}</p>
+        <p>Valor Total do Serviço: {{ ordem.valor_total_servico }}</p>
+        <p>Valor total: {{ valor_total }}</p>
+        <form action="{% url 'ordem_servico:concluir_ordem' ordem.id %}" method="post">
+            {% csrf_token %}
+            {{ form_peca.as_p }}
+            {{ form_servico.as_p }}
+            <input type="submit" value="Concluir Ordem">
+        </form>
+    </div>
+    <div class='col-1'></div>
+</div>
+
+{% endblock %}

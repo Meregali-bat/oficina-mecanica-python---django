@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'head'  %}
+<link rel="stylesheet" href="{% static 'funcionarios/css/funcionarios.css' %}"> 
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    
+<div class="row" style='margin:0; padding-top: 5rem;'>
+    <div class='col-1'></div>
+    <div class='col-10'>
+        <table class="table table-dark" id="table-mecanicos">
+            <thead>
+              <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Especialidade</th>
+                <th scope="col">Equipe</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for mecanico in mecanicos %}  
+                    <tr>
+                        <td>{{mecanico.codigo}}</td>
+                        <td>{{mecanico.nome}}</td>
+                        <td>{{mecanico.endereco}}</td>
+                        <td>{{mecanico.especialidade}}</td>
+                        <td>
+                            {% if mecanico.equipe %}
+                                {{ mecanico.equipe.nome }}
+                            {% else %}
+                                Sem equipe
+                            {% endif %}
+                            </td>
+                        <td>
+                            <a href="{% url 'funcionarios:editar_mecanico' mecanico.id %}" class="btn-edit-mecanico">Editar</a>
+                            <a href="{% url 'funcionarios:remover_mecanico' mecanico.id %}" class="btn-remove-mecanico">Remover</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+          <a href="{% url 'funcionarios:adicionar_mecanico' %}" class="btn-add-mecanico">Adicionar Mecânico</a>
+          <a href="{% url 'funcionarios:listar_equipes' %}" class="btn-list-equipe">Lista de Equipes</a>  <!-- Botão para a lista de equipes -->
+    </div>
+    <div class='col-1'></div>
+</div>
+
+{% endblock %}
