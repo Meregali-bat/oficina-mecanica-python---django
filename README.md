@@ -8,8 +8,6 @@
   
 * CSS
   
-* BOOTSTRAP
-  
 * PYTHON
   
 * DJANGO
