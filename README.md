@@ -4,9 +4,15 @@
 
 ## Ferramentas utilizadas:
 
+* HTML
+  
+* CSS
+  
+* BOOTSTRAP
+  
 * PYTHON
-
-*  DJANGO
+  
+* DJANGO
 
 ## Feito por:
 
